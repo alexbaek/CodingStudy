@@ -1,3 +1,6 @@
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by wooyoung on 2016. 11. 17..
  */
@@ -10,41 +13,20 @@ public class OddOccurrencesInArray {
             return 0;
         }
 
-        int length = A.length;
-        int index = 0;
-        boolean isPair;
+        Map<Integer,Integer> matchMap = new HashMap<Integer,Integer>();
+        int unPaired = 0;
 
-        for (int i=0; i<length; i++) {
-            index = i;
-            isPair = false;
+        for(int i=0;i<A.length;i++){
+            int value = matchMap.get(A[i])==null?0:matchMap.get(A[i]);
+            matchMap.put(A[i],value+1);
+        }
 
-            // 끝에 도달하지 않았을때.
-            if (i != length || A[i] != 0) {
-                for (int j=i+1; j<length; j++) {
-
-                    System.out.println("A[i] : " + A[i] + "A[i] : " + A[i]);
-
-                    if (A[i] == A[j]) {
-                        // 짝을 찾음.
-                        A[i] = 0;
-                        A[j] = 0;
-                        isPair = true;
-                        break;
-                    }
-                }
-
-                if (isPair == false) {
-                    // 짝을 찾지 못함.
-
-                    System.out.println("isPair : " + A[index]);
-                    break;
-                }
+        for(Map.Entry<Integer, Integer> entry : matchMap.entrySet()){
+            if(entry.getValue() % 2 > 0){
+                unPaired = entry.getKey();
             }
         }
 
-        int result = A[index];
-        System.out.println("result : " + result);
-
-        return result;
+        return unPaired;
     }
 }

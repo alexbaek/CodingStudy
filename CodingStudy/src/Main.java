@@ -7,6 +7,7 @@ public class Main {
 
         int[] A = {9, 3, 9, 3, 9, 7, 9};
 
-        sol.solution(A);
+        int result = sol.solution(A);
+        System.out.println("result = " + result);
     }
 }
